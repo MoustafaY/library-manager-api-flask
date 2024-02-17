@@ -177,3 +177,276 @@ curl --location --request PUT 'http://127.0.0.1:5000/User' \
 }
 '
 ```
+
+### Delete user
+
+A user deletes their account
+
+* **URL** <br />
+/User
+
+* **Method** <br />
+DELETE
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{'message': 'User deleted'}`
+
+* **Error Response**
+  * **Code:** 400 <br />
+  **Content:** `{"message": "Invalid input"}` <br />
+  OR
+  * **Code:** 404 <br />
+  **Content:** `{"message": "User was not found"}`
+    
+* **Sample Call:** <br />
+```json
+curl --location --request DELETE 'http://127.0.0.1:5000/User' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDQwMywianRpIjoiZGEwYWM0NjUtODU3MS00NTAxLTk3N2QtZGIwNTQ2NGY4Yzg5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImxpbEBnbWFpbC5jb20iLCJuYmYiOjE3MDgxODA0MDMsImNzcmYiOiI0YjNmYTUwNi1hNWQzLTRjODYtYjM3Ny0xMjAwZjFlZWI3YWMiLCJleHAiOjE3MDgxODEwMDN9.aIRnQBEMuGdVAplgCKVwSn00ohBtu2Ew1AgQF6a-Tsg'
+```
+
+### Logout
+
+A user logs out of their account
+
+* **URL** <br />
+/logout
+
+* **Method** <br />
+DELETE
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{'message': 'logged out'}`
+
+* **Sample Call:** <br />
+```json
+curl --location --request DELETE 'http://127.0.0.1:5000/logout' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDQ2NCwianRpIjoiNWM0YzFjZjgtZTdmZi00ZGM5LTlhY2QtNDg0M2RhYmM3ZDhiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MDQ2NCwiY3NyZiI6ImIwN2RiZWIwLWM1ZDYtNDNiNC05MTJhLTU3MDkzZTllODJiNyIsImV4cCI6MTcwODE4MTA2NH0.O-wL2bcZ5MwbYDsgG9pjf9IRVDrwdjjDJitwa0P29VY'
+```
+
+### User rents a book
+
+A user rents/issues a book from the library
+
+* **URL** <br />
+/User/Book/<int: bookId>
+
+* **Method** <br />
+POST
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{
+    "author": "Laugh author",
+    "category": "Comedy",
+    "days rented": 0,
+    "name": "Laugh book",
+    "userEmail": "email@gmail.com"
+}`
+
+* **Error Response**
+  * **Code:** 401 <br />
+  **Content:** `{"message": "Book already issued to another user"}` <br />
+  OR
+  * **Code:** 404 <br />
+  **Content:** `{"message": "book was not found"}`
+    
+* **Sample Call:** <br />
+```json
+curl --location --request POST 'http://127.0.0.1:5000/User/Book/2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDY2OCwianRpIjoiZTQ4ZjkzM2QtNWNlMy00MjdmLThlZmYtYWEyZTVlYmNmZmIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MDY2OCwiY3NyZiI6IjMzZTAzYTYyLWY1MWEtNDM2Zi1iNzViLWQ2YmNlZjVlZjIyYSIsImV4cCI6MTcwODE4MTI2OH0.pppQoL2wa2k8SorK6usiWYNJ2VyVJA9BByc1TOWcJp8'
+```
+
+### User returns a book
+
+A user returns a book to the library
+
+* **URL** <br />
+/User/Book/<int: bookId>
+
+* **Method** <br />
+POST
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{"message": "book returned"}`
+
+* **Error Response**
+  * **Code:** 401 <br />
+  **Content:** `{"message": "Book already not issued to the user"}` <br />
+  OR
+  * **Code:** 404 <br />
+  **Content:** `{"message": "book was not found"}`
+    
+* **Sample Call:** <br />
+```json
+curl --location --request DELETE 'http://127.0.0.1:5000/User/Book/2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDY2OCwianRpIjoiZTQ4ZjkzM2QtNWNlMy00MjdmLThlZmYtYWEyZTVlYmNmZmIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MDY2OCwiY3NyZiI6IjMzZTAzYTYyLWY1MWEtNDM2Zi1iNzViLWQ2YmNlZjVlZjIyYSIsImV4cCI6MTcwODE4MTI2OH0.pppQoL2wa2k8SorK6usiWYNJ2VyVJA9BByc1TOWcJp8'
+```
+
+### User makes payment
+
+A user makes a payment for their late fees
+
+* **URL** <br />
+/User
+
+* **Method** <br />
+POST
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+**Required:** `{"payment": 3.0}`
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{"message": "Payment completed, your new balance is 7.0"}`
+
+* **Error Response**
+  * **Code:** 400 <br />
+  **Content:** `{"message": "Invalid input"}` <br />
+    
+* **Sample Call:** <br />
+```json
+curl --location 'http://127.0.0.1:5000/User' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDY2OCwianRpIjoiZTQ4ZjkzM2QtNWNlMy00MjdmLThlZmYtYWEyZTVlYmNmZmIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MDY2OCwiY3NyZiI6IjMzZTAzYTYyLWY1MWEtNDM2Zi1iNzViLWQ2YmNlZjVlZjIyYSIsImV4cCI6MTcwODE4MTI2OH0.pppQoL2wa2k8SorK6usiWYNJ2VyVJA9BByc1TOWcJp8' \
+--data '{
+    "payment": 3.0
+}'
+```
+
+### Teacher passes time
+
+A teacher passes time for the library system
+
+* **URL** <br />
+/User
+
+* **Method** <br />
+GET
+
+* **URL Params** <br />
+**Required:** `time=[number of days to pass]`
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{"message": "Time passed by 10"}`
+
+* **Error Response**
+  * **Code:** 400 <br />
+  **Content:** `{"message": "Invalid input"}` <br />
+    
+* **Sample Call:** <br />
+```json
+curl --location 'http://127.0.0.1:5000/User?time=10' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDY2OCwianRpIjoiZTQ4ZjkzM2QtNWNlMy00MjdmLThlZmYtYWEyZTVlYmNmZmIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MDY2OCwiY3NyZiI6IjMzZTAzYTYyLWY1MWEtNDM2Zi1iNzViLWQ2YmNlZjVlZjIyYSIsImV4cCI6MTcwODE4MTI2OH0.pppQoL2wa2k8SorK6usiWYNJ2VyVJA9BByc1TOWcJp8'
+```
+
+### Teacher creates books
+
+A teacher creates books to be added to the library
+
+* **URL** <br />
+/Books
+
+* **Method** <br />
+POST
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+**Required:** `{
+    "books":[
+        {
+            "name": "Scary book",
+            "category": "Horror",
+            "author": "Scary author"
+        },
+        {
+            "name": "Laugh book",
+            "category": "Comedy",
+            "author": "Laugh author"
+        }
+    ]
+}`
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `[
+    {
+        "author": "Scary author",
+        "bookId": 1,
+        "category": "Horror",
+        "days rented": 0,
+        "name": "Scary book",
+        "user": null
+    },
+    {
+        "author": "Laugh author",
+        "bookId": 2,
+        "category": "Comedy",
+        "days rented": 0,
+        "name": "Laugh book",
+        "user": null
+    }
+]`
+
+* **Error Response**
+  * **Code:** 400 <br />
+  **Content:** `{"message": "Invalid input"}` <br />
+  OR
+  **Code:** 403 <br />
+  **Content:** `{"message": "You do not have permission for this action"}` <br />
+    
+* **Sample Call:** <br />
+```json
+curl --location 'http://127.0.0.1:5000/Books' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MDY2OCwianRpIjoiZTQ4ZjkzM2QtNWNlMy00MjdmLThlZmYtYWEyZTVlYmNmZmIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MDY2OCwiY3NyZiI6IjMzZTAzYTYyLWY1MWEtNDM2Zi1iNzViLWQ2YmNlZjVlZjIyYSIsImV4cCI6MTcwODE4MTI2OH0.pppQoL2wa2k8SorK6usiWYNJ2VyVJA9BByc1TOWcJp8' \
+--data '{
+    "books":[
+        {
+            "name": "Scary book",
+            "category": "Horror",
+            "author": "Scary author"
+        },
+        {
+            "name": "Laugh book",
+            "category": "Comedy",
+            "author": "Laugh author"
+        }
+    ]
+}'
+```
