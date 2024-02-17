@@ -450,3 +450,87 @@ curl --location 'http://127.0.0.1:5000/Books' \
     ]
 }'
 ```
+
+### Teacher deletes a book
+
+A teacher deletes a book from the library
+
+* **URL** <br />
+/User/Book/<int: bookId>
+
+* **Method** <br />
+DELETE
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{"message": "Book deleted"}`
+
+* **Error Response**
+  * **Code:** 401 <br />
+  **Content:** `{"message": "Book already not issued to the user"}` <br />
+  OR
+  * **Code:** 404 <br />
+  **Content:** `{"message": "book was not found"}` <br />
+  OR
+  * **Code:** 403 <br />
+  **Content:** `{"message": "you do not have permission for this action"}` <br />
+    
+* **Sample Call:** <br />
+```json
+curl --location --request DELETE 'http://127.0.0.1:5000/Book/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MTc1NCwianRpIjoiODA3Zjc4OGMtYTAzZC00MGJlLWJkNTItOWU1ZjY5YWQ1Njk5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MTc1NCwiY3NyZiI6IjM3MDIzYTRmLTg1NGYtNDE1MC04MDdhLTlhZThjODYzY2NkZiIsImV4cCI6MTcwODE4MjM1NH0.ewpF8pOs5vqHXDY9PzU7aflP0yeeLuMC3mxx9p-LLTI'
+```
+
+### Teacher changes a book
+
+A teacher changes book details
+
+* **URL** <br />
+/User/Book/<int: bookId>
+
+* **Method** <br />
+PUT
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{
+    "author": "Comedy author",
+    "bookId": 2,
+    "category": "Comedy",
+    "days rented": 20,
+    "name": "Comedy book"
+}`
+
+* **Error Response**
+  * **Code:** 401 <br />
+  **Content:** `{"message": "Book already not issued to the user"}` <br />
+  OR
+  * **Code:** 404 <br />
+  **Content:** `{"message": "book was not found"}` <br />
+  OR
+  * **Code:** 403 <br />
+  **Content:** `{"message": "you do not have permission for this action"}` <br />
+    
+* **Sample Call:** <br />
+```json
+curl --location --request PUT 'http://127.0.0.1:5000/Book/2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE4MTc1NCwianRpIjoiODA3Zjc4OGMtYTAzZC00MGJlLWJkNTItOWU1ZjY5YWQ1Njk5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE4MTc1NCwiY3NyZiI6IjM3MDIzYTRmLTg1NGYtNDE1MC04MDdhLTlhZThjODYzY2NkZiIsImV4cCI6MTcwODE4MjM1NH0.ewpF8pOs5vqHXDY9PzU7aflP0yeeLuMC3mxx9p-LLTI' \
+--data '{
+    "author": "Comedy author",
+    "category": "Comedy",
+    "name": "Comedy book"
+}'
+```
