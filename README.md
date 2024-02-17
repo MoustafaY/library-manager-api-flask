@@ -28,8 +28,20 @@ None
 **Required:** <br />
 ```json
 {
-  "email": "email@gmail.com",
-  "password": "pass"
+    "users":[
+        {
+            "name": "Moustafa",
+            "email": "email@gmail.com",
+            "password": "pass",
+            "is_teacher": true
+        },
+        {
+            "name": "Lily",
+            "email": "lil@gmail.com",
+            "password": "lil",
+            "is_teacher": false
+        }
+    ]
 }
 ```
 
@@ -62,8 +74,106 @@ None
 curl --location 'http://127.0.0.1:5000/Users' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "name": "Moustafa",
+    "users":[
+        {
+            "name": "Moustafa",
+            "email": "email@gmail.com",
+            "password": "pass",
+            "is_teacher": true
+        },
+        {
+            "name": "Lily",
+            "email": "lil@gmail.com",
+            "password": "lil",
+            "is_teacher": false
+        }
+    ]
+}'
+```
+
+### Login as a user
+
+Validates and creates a JWT token that can be used for protected api calls
+
+* **URL** <br />
+/login
+
+* **Method** <br />
+POST
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+**Required:** <br />
+```json
+{
+  "email": "email@gmail.com",
+  "password": "pass"
+}
+```
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{'message': f"Hello {name}, you are logged in!", 'token': {access_token}}`
+
+* **Error Response**
+  * **Code:** 400 <br />
+  **Content:** `{"message": "Invalid password"}` or  `{"message": "Invalid input"}` <br />
+  OR
+  * **Code:** 404 <br />
+  **Content:** `{"message": "User was not found"}`
+    
+* **Sample Call:** <br />
+```json
+curl --location 'http://127.0.0.1:5000/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
     "email": "email@gmail.com",
     "password": "pass"
 }'
+```
+
+### Change user information
+
+A user changes their information
+
+* **URL** <br />
+/User
+
+* **Method** <br />
+PUT
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+```json
+{
+  "name": "Lily"
+}
+```
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `{
+    "balance": 0.0,
+    "email": "email@gmail.com",
+    "is teacher": true,
+    "name": "Lily"
+}`
+
+* **Error Response**
+  * **Code:** 400 <br />
+  **Content:** `{"message": "Invalid input"}` <br />
+    
+* **Sample Call:** <br />
+```json
+curl --location --request PUT 'http://127.0.0.1:5000/User' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODE3ODI1MSwianRpIjoiNDMyNTgzODAtNDJkYS00YTdlLTg3MjktMzI5MzhiMTk2MTJhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsQGdtYWlsLmNvbSIsIm5iZiI6MTcwODE3ODI1MSwiY3NyZiI6ImUzYTVmYzRiLTQ1NzItNGI0Yi05ZWUyLWY1OTA0YTA1OTA3OSIsImV4cCI6MTcwODE3ODg1MX0.FiYSL2zd4hU3BuiX6RFy5v3P4ZjJkE0QdWvlx39Dju4' \
+--data '{
+  "name": "Lily"
+}
+'
 ```
