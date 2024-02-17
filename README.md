@@ -54,7 +54,7 @@ None
   * **Code:** 400 <br />
   **Content:** `{"message": "Invalid input"}` <br />
   OR
-  * **Code:** 401 <br />
+  * **Code:** 409 <br />
   **Content:** `{"message": "Email already exists"}`
     
 * **Sample Call:** <br />
