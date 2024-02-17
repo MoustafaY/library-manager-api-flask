@@ -534,3 +534,78 @@ curl --location --request PUT 'http://127.0.0.1:5000/Book/2' \
     "name": "Comedy book"
 }'
 ```
+
+### Get all books
+
+Return all the books in the database, used for development only
+
+* **URL** <br />
+/Books
+
+* **Method** <br />
+GET
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `[
+    {
+        "author": "Comedy author",
+        "category": "Comedy",
+        "days rented": 20,
+        "name": "Comedy book",
+        "user": "email@gmail.com"
+    }
+]`
+    
+* **Sample Call:** <br />
+```json
+curl --location 'http://127.0.0.1:5000/Books'
+```
+
+### Get all users
+
+Return all the users in the database, used for development only
+
+* **URL** <br />
+/Users
+
+* **Method** <br />
+GET
+
+* **URL Params** <br />
+None
+
+* **Data Params** <br />
+None
+
+* **Success Response** <br />
+**Code:** 200 <br />
+**Content:** `[
+    {
+        "balance": 10.0,
+        "books": [
+            {
+                "author": "Laugh author",
+                "category": "Comedy",
+                "days rented": 20,
+                "id": 2,
+                "name": "Laugh book"
+            }
+        ],
+        "email": "email@gmail.com",
+        "is teacher?": true,
+        "name": "Lily",
+        "password": "$2b$12$K6ituexpz0VgRYSl9pyQPOxytUGrut6iHO1EdTWYz58N328vci2cO"
+    }
+]`
+    
+* **Sample Call:** <br />
+```json
+curl --location 'http://127.0.0.1:5000/Users'
+```
